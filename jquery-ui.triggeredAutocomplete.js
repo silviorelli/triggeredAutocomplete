@@ -146,6 +146,11 @@
 			var check_contents = contents.substring(contents.lastIndexOf(this.options.trigger) - 1, cursorPos);
 			var regex = new RegExp('\\B\\'+this.options.trigger+'([\\w\\-]+)');
 
+			// Close the suggestion list if there's only the trigger
+			if (check_contents == " "+this.options.trigger){
+				this.close();
+			}
+			
 			if (contents.indexOf(this.options.trigger) >= 0 && check_contents.match(regex)) {
 
 				// Get the characters following the trigger and before the cursor position.
