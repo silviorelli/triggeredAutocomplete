@@ -8,7 +8,8 @@ $('#inputbox').triggeredAutocomplete({
 	hidden: '#hidden_inputbox,
 	source: "/search.php",
 	trigger: "@",
-	maxLength: 25
+	maxLength: 25,
+  maxResults: 5
 });
 ```
 
@@ -26,6 +27,8 @@ $('#inputbox').triggeredAutocomplete({
 	source: new Array({ "value": "1234", "label": 'Geech'}, {"value": "5312", "label": "Marf"})
 });
 ```
+
+The maxResults option applies only when an array is used as source, not to the ajax call.
 
 This also supports an optional img to appear beside each result.  You just need to pass an img URL for each value and label.  Here is the CSS for the image:
 

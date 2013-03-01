@@ -19,7 +19,8 @@
 		options: {
 			trigger: "@",
 			allowDuplicates: true,
-			maxLength: 0
+			maxLength: 0,
+			maxResults: 0
 		},
 
 		_create:function() {
@@ -150,7 +151,7 @@
 			if (check_contents == " "+this.options.trigger){
 				this.close();
 			}
-			
+
 			if (contents.indexOf(this.options.trigger) >= 0 && check_contents.match(regex)) {
 
 				// Get the characters following the trigger and before the cursor position.
@@ -181,7 +182,12 @@
 			if ( $.isArray(this.options.source) ) {
 				array = this.options.source;
 				this.source = function( request, response ) {
-					response( $.ui.autocomplete.filter(array, request.term) );
+					if(this.options.maxResults){
+						console.info("maxresults = "+this.options.maxResults);
+						response( $.ui.autocomplete.filter(array, request.term).slice(0,this.options.maxResults) );
+					}else{
+						response( $.ui.autocomplete.filter(array, request.term) );
+					}
 				};
 			} else if ( typeof this.options.source === "string" ) {
 				url = this.options.source;
