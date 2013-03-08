@@ -126,9 +126,9 @@
 				this.search( null, event );
 				return;
 			}
-			if ( this.menu.first() && /^previous/.test(direction) ||
-					this.menu.last() && /^next/.test(direction) ) {
-				this.menu.deactivate();
+			if ( this.menu.isFirstItem() && /^previous/.test(direction) ||
+					this.menu.isLastItem() && /^next/.test(direction) ) {
+				this.menu.disable();
 				return;
 			}
 			this.menu[ direction ]( event );
@@ -183,7 +183,6 @@
 				array = this.options.source;
 				this.source = function( request, response ) {
 					if(this.options.maxResults){
-						console.info("maxresults = "+this.options.maxResults);
 						response( $.ui.autocomplete.filter(array, request.term).slice(0,this.options.maxResults) );
 					}else{
 						response( $.ui.autocomplete.filter(array, request.term) );
